@@ -46,7 +46,7 @@ fun StaffApprovalScreen(
         modifier = Modifier.padding(16.dp)
     ) { padding ->
         if (state.isAddingApproval) {
-            AddEmployeeDialog(state = state, onEvent = onEvent)
+            AddStaffApprovalList(state = state, onEvent = onEvent)
         }
 
         LazyColumn(
@@ -85,7 +85,7 @@ fun StaffApprovalScreen(
     showBackground = true
 )
 @Composable
-fun EmployeeTestPreview() {
+fun StaffApprovalPreview() {
     StaffApprovalScreen(state = ApprovalState()) {
 
     }

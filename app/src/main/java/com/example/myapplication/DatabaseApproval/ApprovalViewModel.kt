@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.Database.Approval
 import com.example.myapplication.Database.ApprovalStaffDao
+import com.example.myapplication.DatabaseAttendance.AttendanceDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,18 +15,18 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class ApprovalViewModel (private val dao: ApprovalStaffDao): ViewModel()
+class ApprovalViewModel(private val apprdao: ApprovalStaffDao): ViewModel()
 {
-    private val _sortType = MutableStateFlow(SortType.Staff_Approval)
-    private val _approval = _sortType
+    private val _Approval_sortType = MutableStateFlow(ApprovalSortType.Staff_Approval)
+    private val _approval = _Approval_sortType
         .flatMapLatest { sortType -> when(sortType){
-            SortType.Staff_Approval ->dao.getSatffApprovallist()
+            ApprovalSortType.Staff_Approval ->apprdao.getSatffApprovallist()
         } }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
     private val _state = MutableStateFlow(ApprovalState())
-    val state = combine(_state,_sortType,_approval){
+    val state = combine(_state,_Approval_sortType,_approval){
         state,sortType,approval ->state.copy(
-            sortType = sortType,
+            approvalSortType = sortType,
             approval = approval
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ApprovalState())
@@ -34,7 +35,7 @@ class ApprovalViewModel (private val dao: ApprovalStaffDao): ViewModel()
         when(event){
             is ApprovalEvent.DeleteApproval -> {
                 viewModelScope.launch {
-                    dao.deleteApproval(event.approval)
+                    apprdao.deleteApproval(event.approval)
                 }
 
             }
@@ -65,7 +66,7 @@ class ApprovalViewModel (private val dao: ApprovalStaffDao): ViewModel()
                     appdate = appdate
                 )
                 viewModelScope.launch {
-                    dao.insertApproval(approval)
+                    apprdao.insertApproval(approval)
                 }
                 _state.update { it.copy(
                     isAddingApproval = false,
@@ -99,7 +100,7 @@ class ApprovalViewModel (private val dao: ApprovalStaffDao): ViewModel()
                 _state.update { it.copy(isAddingApproval = true) }
             }
             is ApprovalEvent.SortApproval -> {
-                _sortType.value = event.sortType
+                _Approval_sortType.value = event.approvalSortType
             }
         }
     }

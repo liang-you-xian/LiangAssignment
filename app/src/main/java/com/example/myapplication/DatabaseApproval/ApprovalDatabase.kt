@@ -2,6 +2,7 @@ package com.example.myapplication.Database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.myapplication.DatabaseAttendance.Attendance
 
 @Database(
     entities = [Approval::class],
@@ -10,5 +11,5 @@ import androidx.room.RoomDatabase
 
 
 abstract  class ApprovalDatabase : RoomDatabase(){
-    abstract val dao: ApprovalStaffDao
+    abstract val apprdao: ApprovalStaffDao
 }

@@ -12,33 +12,53 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.myapplication.Database.ApprovalDatabase
 import com.example.myapplication.DatabaseApproval.ApprovalViewModel
+import com.example.myapplication.DatabaseAttendance.AttendanceDatabase
+import com.example.myapplication.DatabaseAttendance.AttendanceViewModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.ui.theme.Approvalscreen.StaffApprovalScreen
 
 class MainActivity : ComponentActivity() {
-    private val db by lazy {
+    private val appr by lazy {
         Room.databaseBuilder(
             applicationContext,
             ApprovalDatabase::class.java,
-            "employee.db"
+            "approval.appr"
         ).build()
     }
-    private val viewModel by viewModels<ApprovalViewModel>(
+    private val atte by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            AttendanceDatabase::class.java,
+            "Attendance.atte"
+        ).build()
+    }
+    private val approvalviewModel by viewModels<ApprovalViewModel>(
         factoryProducer = {
             object  : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return ApprovalViewModel(db.dao) as T
+                    return ApprovalViewModel(appr.apprdao) as T
                 }
             }
         }
     )
+    private val attendanceviewModel by viewModels<AttendanceViewModel>(
+        factoryProducer = {
+            object  : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return AttendanceViewModel(atte.attdao) as T
+                }
+            }
+        }
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
-                val state by viewModel.state.collectAsState()
-                StaffApprovalScreen(state = state, onEvent = viewModel::onEvent)
+                val apprstate by approvalviewModel.state.collectAsState()
+                val Attesyaye by attendanceviewModel.state.collectAsState()
+                StaffApprovalScreen(state = apprstate, onEvent = approvalviewModel::onEvent)
             }
         }
     }

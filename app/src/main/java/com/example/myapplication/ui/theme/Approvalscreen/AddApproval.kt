@@ -8,13 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.DatabaseApproval.ApprovalEvent
 import com.example.myapplication.DatabaseApproval.ApprovalState
 
 
 @Composable
-fun AddEmployeeDialog (
+fun AddStaffApprovalList (
     state: ApprovalState,
     onEvent: (ApprovalEvent) -> Unit,
     modifier: Modifier = Modifier
@@ -24,11 +25,12 @@ fun AddEmployeeDialog (
         onDismissRequest = {
             onEvent(ApprovalEvent.Hidelist)
         },
-        title = { Text(text = "Add Employee") },
+        title = { Text(text = "Send a Approval") },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                //Staff ID
                 TextField(
                     value = state.staffid,
                     onValueChange = {
@@ -38,7 +40,7 @@ fun AddEmployeeDialog (
                         Text(text = "Name")
                     }
                 )
-
+                //leave and late status
                 TextField(
                     value = state.leaveandlate,
                     onValueChange = {
@@ -48,6 +50,7 @@ fun AddEmployeeDialog (
                         Text(text = "Leave")
                     }
                 )
+                //Reason
                 TextField(
                     value = state.appreason,
                     onValueChange = {
@@ -57,6 +60,7 @@ fun AddEmployeeDialog (
                         Text(text = "Reason")
                     }
                 )
+                //State Info
                 TextField(
                     value = state.stateinfo,
                     onValueChange = {
@@ -66,6 +70,7 @@ fun AddEmployeeDialog (
                         Text(text = "Info")
                     }
                 )
+                //Time
                 TextField(
                     value = state.apptime,
                     onValueChange = {
@@ -75,6 +80,7 @@ fun AddEmployeeDialog (
                         Text(text = "Time")
                     }
                 )
+                //Date
                 TextField(
                     value = state.appdate,
                     onValueChange = {
@@ -92,7 +98,7 @@ fun AddEmployeeDialog (
                     onEvent(ApprovalEvent.SaveApproval)
                 }
             ) {
-                Text(text = "Save")
+                Text(text = "Send")
             }
         }
     )
