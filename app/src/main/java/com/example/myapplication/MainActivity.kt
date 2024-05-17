@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
                 val apprstate by approvalviewModel.state.collectAsState()
                 val Attesyaye by attendanceviewModel.state.collectAsState()
                 StaffApprovalScreen(state = apprstate, onEvent = approvalviewModel::onEvent)
+                //app()
             }
         }
     }

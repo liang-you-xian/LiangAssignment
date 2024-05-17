@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.theme.Approvalscreen
+package com.example.myapplication.ui.theme.otherScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,16 +29,15 @@ import androidx.compose.ui.unit.sp
 import com.example.myapplication.R
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
-
 @Composable
-fun LoginScreen (
-    onFirstButtonClicked : () -> Unit = {} ,
-    onSecondButtonClicked : () -> Unit = {},
-    modifier: Modifier = Modifier
-    ){
-    var id by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun RegisterScreen(
+    onClickButton1 : () -> Unit ={},
+    onClickButton2 : () -> Unit ={},
+    modifier : Modifier = Modifier){
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmpassword by remember { mutableStateOf("") }
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -57,19 +56,18 @@ fun LoginScreen (
                         .align(alignment = Alignment.CenterHorizontally)
                         .padding(top = 25.dp)
                 )
-                    Text(text = "USER LOGIN", textAlign = TextAlign.Center, fontSize = 30.sp, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(20.dp))
+                Text(text = "STAFF REGISTER", textAlign = TextAlign.Center, fontSize = 30.sp, modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(20.dp))
                 TextField(
-                    value = id,
-                    label = { Text(text = "User ID")},
-                    onValueChange = { id = it },
+                    value = name,
+                    label = { Text(text = "User Name") },
+                    onValueChange = { name = it },
                     modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
 
                 TextField(
-                    label = { Text(text = "Email")},
+                    label = { Text(text = "Email") },
                     value = email,
                     onValueChange = { email = it },
                     modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
@@ -77,25 +75,32 @@ fun LoginScreen (
                 Spacer(modifier = Modifier.height(20.dp))
 
                 TextField(
-                    label = { Text(text = "Password")},
+                    label = { Text(text = "Password") },
                     value = password,
                     onValueChange = { password = it },
                     modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
                 )
+                Spacer(modifier = Modifier.height(20.dp))
+
+                TextField(
+                    label = { Text(text = "Confirm Password") },
+                    value = confirmpassword,
+                    onValueChange = { confirmpassword = it },
+                    modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+                )
 
                 Spacer(modifier = Modifier.height(30.dp))
-                    Button(onClick =  onFirstButtonClicked , colors = ButtonDefaults.buttonColors(Color(0xFFBB86FC)),modifier = Modifier.fillMaxWidth()) {
-                        Text(text = "LOGIN")
 
+                    Button(onClick =  onClickButton1 , colors = ButtonDefaults.buttonColors(Color(0xFFBB86FC)),modifier = Modifier.fillMaxWidth()) {
+
+                        Text(text = "REGISTER")
                     }
                 Spacer(modifier = Modifier.height(10.dp))
-                    Button(onClick = onSecondButtonClicked,colors = ButtonDefaults.buttonColors(Color(0xFFBB86FC)), modifier = Modifier.fillMaxWidth()) {
-                        Text(text = "SIGN UP")
+                    Button(onClick = onClickButton2,colors = ButtonDefaults.buttonColors(Color(0xFFBB86FC)), modifier = Modifier.fillMaxWidth()) {
+                        Text(text = "BACK TO LOGIN")
 
 
                     }
-                Spacer(modifier = Modifier.height(10.dp))
-
 
             }
 
@@ -107,8 +112,8 @@ fun LoginScreen (
 
 @Preview
 @Composable
-fun LoginPreview() {
+fun RegisterPreview() {
     MyApplicationTheme {
-        LoginScreen(modifier = Modifier.fillMaxSize())
+        RegisterScreen()
     }
 }

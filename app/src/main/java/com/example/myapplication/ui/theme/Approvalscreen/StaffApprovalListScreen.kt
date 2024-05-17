@@ -31,6 +31,7 @@ fun StaffApprovalScreen(
     state: ApprovalState,
     onEvent: (ApprovalEvent) -> Unit
 ) {
+    val staffid = "b"
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
@@ -55,24 +56,30 @@ fun StaffApprovalScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ){
             items(state.approval) { Approval ->
-                Row (
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column (
-                        modifier = Modifier.weight(1f)
-                    ){
-                        Text(text = "${Approval.staffid}",
-                            fontSize = 20.sp
-                        )
-                        Text(text = "${Approval.leaveandlate}", fontSize = 12.sp)
-                    }
-                    IconButton(onClick = {
-                        onEvent(ApprovalEvent.DeleteApproval(Approval))
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete Employee"
-                        )
+                if(Approval.staffid == staffid) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth()
+
+                    ) {
+                        Column(
+                            modifier = Modifier.weight(1f)
+
+
+                        ) {
+                            Text(
+                                text = "${Approval.staffid}",
+                                fontSize = 20.sp
+                            )
+                            Text(text = "${Approval.leaveandlate}", fontSize = 12.sp)
+                        }
+                        IconButton(onClick = {
+                            onEvent(ApprovalEvent.DeleteApproval(Approval))
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "Delete Employee"
+                            )
+                        }
                     }
                 }
             }
@@ -86,7 +93,6 @@ fun StaffApprovalScreen(
 )
 @Composable
 fun StaffApprovalPreview() {
-    StaffApprovalScreen(state = ApprovalState()) {
+    StaffApprovalScreen(state = ApprovalState()){}
 
-    }
 }

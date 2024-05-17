@@ -10,8 +10,9 @@ data class Approval(
     val stateinfo: String? ="",
     val apptime:String? ="",
     val appdate:String? ="",
-    @PrimaryKey(autoGenerate = false)
-    val staffid: String ="None"
+    val staffid: String ="None",
+    @PrimaryKey(autoGenerate = true)
+    val apporvalnum: Int = 0
 
 )
 

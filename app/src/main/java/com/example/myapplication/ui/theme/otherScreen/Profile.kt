@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.theme.Approvalscreen
+package com.example.myapplication.ui.theme.otherScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,6 +13,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -60,49 +62,69 @@ fun ProfileScreen(name:String,
         Card() {
             Column {
                 Text(text = "$name", fontSize = 50.sp, modifier = Modifier.fillMaxWidth())
-                Text(text = "$email",modifier = Modifier.fillMaxWidth())
+                Text(text = "$email", modifier = Modifier.fillMaxWidth())
             }
-        }
-        Text(text = "Your Salary:", fontSize = 20.sp)
-        Box(
-            modifier = Modifier
-                .background(color = Color.White)
-                .fillMaxWidth()
-        ) {
-            Row {
-                Text(
-                    text = "RM",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Start
-                )
-                Text(
-                    text = "$salary",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-            }
-        }
-        Text(text = "$notivication", fontSize = 20.sp)
-        Box(modifier = Modifier
-            .background(color = Color.White)
-            .fillMaxWidth()
-            .clickable { onClickButton1() }
-        ) {
-            Row {
 
-                Text(
-                    text = "$work",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
+            Text(text = "Your Salary:", fontSize = 20.sp)
+            Card(
+                colors = CardDefaults.cardColors(Color.White),
+                modifier = Modifier
+                    //.background(color = Color.White)
+                    .fillMaxWidth()
+            ) {
+                Row {
+                    Text(
+                        text = "RM",
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Start
+                    )
+                    Text(
+                        text = "$salary",
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )
+                }
             }
+            Text(text = "$notivication", fontSize = 20.sp)
+            Card(
+                colors = CardDefaults.cardColors(Color.White),
+                modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onClickButton1() }
+            ) {
+                Row {
+
+                    Text(
+                        text = "$work",
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+            Text(text = "$notivication", fontSize = 20.sp)
+            Card(
+                colors = CardDefaults.cardColors(Color.White),
+                modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onClickButton1() }
+            ) {
+                Row {
+
+                    Text(
+                        text = "$work",
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+
         }
             Button(onClick = onClickButton2, Modifier.fillMaxWidth()) { Text(text = "$textbotton1") }
             Button(onClick = onClickButton3, Modifier.fillMaxWidth()) { Text(text = "Logout") }
-            Button(onClick = onClickButton4, Modifier.fillMaxWidth()) { Text(text = "$textbotton1") }
 
     }
 
@@ -128,6 +150,6 @@ fun ProfileScreen(name:String,
 @Composable
 fun profilePreview() {
     MyApplicationTheme {
-        ProfileScreen(name = "liangyouxian", email ="liangyouxian1@gmail.com" , salary = "2000.50", work = "10", notification ="Work/Staff Approval:" , textbotton1 = "Approval Leave & Late")
+        ProfileScreen(name = "shit", email ="liangyouxian1@gmail.com" , salary = "2000.50", work = "10", notification ="Work/Staff Approval:" , textbotton1 = "Approval Leave & Late")
     }
 }

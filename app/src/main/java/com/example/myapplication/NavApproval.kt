@@ -15,10 +15,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.ui.theme.Approvalscreen.Homepage
-import com.example.myapplication.ui.theme.Approvalscreen.LoginScreen
-import com.example.myapplication.ui.theme.Approvalscreen.ProfileScreen
-import com.example.myapplication.ui.theme.Approvalscreen.RegisterScreen
+import com.example.myapplication.ui.theme.otherScreen.Homepage
+import com.example.myapplication.ui.theme.otherScreen.LoginScreen
+import com.example.myapplication.ui.theme.otherScreen.ProfileScreen
+import com.example.myapplication.ui.theme.otherScreen.RegisterScreen
 
 enum class MainScreen(@StringRes val title: Int) {
     Login(title = R.string.login),
